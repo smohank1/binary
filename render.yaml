@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: cat-dog-classifier
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT app:app
+    plan: free
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.18
+      - key: FLASK_ENV
+        value: production
+    healthCheckPath: /health
